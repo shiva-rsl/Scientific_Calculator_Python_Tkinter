@@ -1,4 +1,49 @@
+import math
 import tkinter as tk
+
+
+#-------------------------------------------------------------------
+operation = ''
+
+def button_numbers(num):
+    if operation != '':
+        result_entry.delete(0, tk.END)
+    for i in range(10):
+        if i == num:
+            result_entry.insert('end', num)
+
+def button_ac():
+    length = len(result_entry.get())
+    result_entry.delete(length-1)
+
+def button_ce():
+    result_entry.delete(0, tk.END)
+
+
+def button_plus():
+    global operation
+    operation = '+'
+    first_num = result_entry.get()
+    return first_num
+
+def button_equal():
+    last_num = result_entry.get()
+    if operation == '+':
+        first_num = button_plus()
+        result = first_num + last_num
+        result_entry.delete(0, tk.END)
+        result_entry.insert(0, result)
+
+def button_sqrt():
+    num = int(result_entry.get())
+    result = math.sqrt(num)
+    result_entry.delete(0, tk.END)
+    result_entry.insert(0, result)
+
+
+#-------------------------------------------------------------------
+
+
 
 window = tk.Tk()
 
@@ -12,64 +57,63 @@ for col in range(6):
     window.columnconfigure(col, weight=1)
 
 
-result_label = tk.Entry(
+result_entry = tk.Entry(
     master=window,
     font=('sans-serif', 20, 'bold'),
     border=5,
     justify='right',
-    state='readonly',
 )
-result_label.grid(row=0, column=0, columnspan=6, pady=(30, 30),)
+result_entry.grid(row=0, column=0, columnspan=6, pady=(30, 30),)
 
 
 buttons_features = [
-    {'text': 'sin', 'bg': '#000000', 'command': print('Sin'), 'command': print('Sin')}, 
-    {'text': '99', 'bg': '#000000', 'command': print('Sin')}, 
-    {'text': '99', 'bg': '#000000', 'command': print('Sin')}, 
-    {'text': '99', 'bg': '#000000', 'command': print('Sin')},
-    {'text': '99', 'bg': '#000000', 'command': print('Sin')}, 
-    {'text': '99', 'bg': '#000000', 'command': print('Sin')}, 
-    {'text': '99', 'bg': '#000000', 'command': print('Sin')}, 
-    {'text': '99', 'bg': '#000000', 'command': print('Sin')},
-    {'text': '99', 'bg': '#000000', 'command': print('Sin')}, 
-    {'text': '99', 'bg': '#000000', 'command': print('Sin')}, 
-    {'text': '99', 'bg': '#000000', 'command': print('Sin')}, 
-    {'text': '99', 'bg': '#000000', 'command': print('Sin')},
-    {'text': '99', 'bg': '#000000', 'command': print('Sin')}, 
-    {'text': '99', 'bg': '#000000', 'command': print('Sin')}, 
-    {'text': '99', 'bg': '#000000', 'command': print('Sin')}, 
-    {'text': '99', 'bg': '#000000', 'command': print('Sin')},
-    {'text': '99', 'bg': '#000000', 'command': print('Sin')}, 
-    {'text': '99', 'bg': '#000000', 'command': print('Sin')}, 
-    {'text': '(', 'bg': '#000000', 'command': print('Sin')}, 
-    {'text': ')', 'bg': '#000000', 'command': print('Sin')},
-    {'text': '99', 'bg': '#000000', 'command': print('Sin')}, 
-    {'text': '99', 'bg': '#000000', 'command': print('Sin')}, 
-    {'text': '99', 'bg': '#000000', 'command': print('Sin')}, 
-    {'text': '99', 'bg': '#000000', 'command': print('Sin')},
-    {'text': '99', 'bg': '#000000', 'command': print('Sin')}, 
-    {'text': '7', 'command': print('Sin')}, 
-    {'text': '8', 'command': print('Sin')}, 
-    {'text': '9', 'command': print('Sin')},
-    {'text': '%', 'bg':'#858282', 'command': print('Sin')}, 
-    {'text': '^', 'bg':'#858282', 'command': print('Sin')},
-    {'text': '99', 'bg': '#000000', 'command': print('Sin'), 'command': print('Sin')}, 
-    {'text': '4', 'command': print('Sin')}, 
-    {'text': '5', 'command': print('Sin')}, 
-    {'text': '6', 'command': print('Sin')}, 
-    {'text': '*', 'bg':'#858282', 'command': print('Sin')}, 
-    {'text': '/', 'bg':'#858282', 'command': print('Sin')}, 
-    {'text': 'AC', 'bg': '#DC1212', 'command': print('Sin')}, 
-    {'text': '1', 'command': print('Sin')}, 
-    {'text': '2', 'command': print('Sin')}, 
-    {'text': '3', 'command': print('Sin')}, 
-    {'text': '+', 'bg':'#858282', 'command': print('Sin')}, 
-    {'text': '-', 'bg':'#858282', 'command': print('Sin')}, 
-    {'text': 'CE', 'bg': '#DC1212', 'command': print('Sin')}, 
-    {'text': '+/-', 'command': print('Sin')}, 
-    {'text': '0', 'command': print('Sin')}, 
-    {'text': '.', 'command': print('Sin')}, 
-    {'text': '=', 'bg':'#858282', 'command': print('Equal')},
+    {'text': 'sin', 'bg': '#000000', 'command': lambda: button_sqrt()}, 
+    {'text': '99', 'bg': '#000000', 'command': lambda: print('Sin')}, 
+    {'text': '98', 'bg': '#000000', 'command': lambda: print('Sin')}, 
+    {'text': '97', 'bg': '#000000', 'command': lambda: print('Sin')},
+    {'text': '96', 'bg': '#000000', 'command': lambda: print('Sin')}, 
+    {'text': '95', 'bg': '#000000', 'command': lambda: print('Sin')}, 
+    {'text': '94', 'bg': '#000000', 'command': lambda: print('Sin')}, 
+    {'text': '93', 'bg': '#000000', 'command': lambda: print('Sin')},
+    {'text': '92', 'bg': '#000000', 'command': lambda: print('Sin')}, 
+    {'text': '91', 'bg': '#000000', 'command': lambda: print('Sin')}, 
+    {'text': '90', 'bg': '#000000', 'command': lambda: print('Sin')}, 
+    {'text': '89', 'bg': '#000000', 'command': lambda: print('Sin')},
+    {'text': '88', 'bg': '#000000', 'command': lambda: print('Sin')}, 
+    {'text': '87', 'bg': '#000000', 'command': lambda: print('Sin')}, 
+    {'text': '86', 'bg': '#000000', 'command': lambda: print('Sin')}, 
+    {'text': '85', 'bg': '#000000', 'command': lambda: print('Sin')},
+    {'text': '84', 'bg': '#000000', 'command': lambda: print('Sin')}, 
+    {'text': '83', 'bg': '#000000', 'command': lambda: print('Sin')}, 
+    {'text': '(', 'bg': '#000000', 'command': lambda: print('Sin')}, 
+    {'text': ')', 'bg': '#000000', 'command': lambda: print('Sin')},
+    {'text': '82', 'bg': '#000000', 'command': lambda: print('Sin')}, 
+    {'text': '81', 'bg': '#000000', 'command': lambda: print('Sin')}, 
+    {'text': '80', 'bg': '#000000', 'command': lambda: print('Sin')}, 
+    {'text': '79', 'bg': '#000000', 'command': lambda: print('Sin')},
+    {'text': '\u03C0', 'bg': '#000000', 'command': lambda: print('Sin')}, 
+    {'text': '7', 'command': lambda: button_numbers(7)}, 
+    {'text': '8', 'command': lambda: button_numbers(8)}, 
+    {'text': '9', 'command': lambda: button_numbers(9)},
+    {'text': '%', 'bg':'#858282', 'command': lambda: print('Sin')}, 
+    {'text': '^', 'bg':'#858282', 'command': lambda: print('Sin')},
+    {'text': 'e', 'bg': '#000000', 'command': lambda: print('Sin'), 'command': lambda: print('Sin')}, 
+    {'text': '4', 'command': lambda: button_numbers(4)}, 
+    {'text': '5', 'command': lambda: button_numbers(5)}, 
+    {'text': '6', 'command': lambda: button_numbers(6)}, 
+    {'text': '*', 'bg':'#858282', 'command': lambda: print('Sin')}, 
+    {'text': '/', 'bg':'#858282', 'command': lambda: print('Sin')}, 
+    {'text': 'AC', 'bg': '#DC1212', 'command': lambda: button_ac()}, 
+    {'text': '1', 'command': lambda: button_numbers(1)}, 
+    {'text': '2', 'command': lambda: button_numbers(2)}, 
+    {'text': '3', 'command': lambda: button_numbers(3)}, 
+    {'text': '+', 'bg':'#858282', 'command': lambda: button_plus()}, 
+    {'text': '-', 'bg':'#858282', 'command': lambda: print('Sin')}, 
+    {'text': 'CE', 'bg': '#DC1212', 'command': lambda: button_ce()}, 
+    {'text': '+/-', 'command': lambda: print('Sin')}, 
+    {'text': '0', 'command': lambda: button_numbers(0)}, 
+    {'text': '.', 'command': lambda: print('Sin')}, 
+    {'text': '=', 'bg':'#858282', 'command': lambda: button_equal()},
 ]
 
 
@@ -99,7 +143,7 @@ for key_object in buttons_features:
         text=key_object['text'],
         bg=bg_color,
         fg=fg_color.get(bg_color, "#000000"),
-        font=('Helvetica', 18, 'bold'),
+        font=('DejaVu Sans', 18,),
         relief='raised',
         bd=5,
         activebackground=active_bg.get(bg_color, '#c0c0c0'),
