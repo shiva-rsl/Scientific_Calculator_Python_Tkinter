@@ -1,48 +1,6 @@
 import math
 import tkinter as tk
-
-
-#-------------------------------------------------------------------
-operation = ''
-
-def button_numbers(num):
-    if operation != '':
-        result_entry.delete(0, tk.END)
-    for i in range(10):
-        if i == num:
-            result_entry.insert('end', num)
-
-def button_ac():
-    length = len(result_entry.get())
-    result_entry.delete(length-1)
-
-def button_ce():
-    result_entry.delete(0, tk.END)
-
-
-def button_plus():
-    global operation
-    operation = '+'
-    first_num = result_entry.get()
-    return first_num
-
-def button_equal():
-    last_num = result_entry.get()
-    if operation == '+':
-        first_num = button_plus()
-        result = first_num + last_num
-        result_entry.delete(0, tk.END)
-        result_entry.insert(0, result)
-
-def button_sqrt():
-    num = int(result_entry.get())
-    result = math.sqrt(num)
-    result_entry.delete(0, tk.END)
-    result_entry.insert(0, result)
-
-
-#-------------------------------------------------------------------
-
+from main import *
 
 
 window = tk.Tk()
@@ -65,44 +23,187 @@ result_entry = tk.Entry(
 )
 result_entry.grid(row=0, column=0, columnspan=6, pady=(30, 30),)
 
+# -----------------------------------------------------------------------------------
+
+
+
+operation = ''
+
+
+def button_sin():
+    result = f'sin('
+    result_entry.delete(0, tk.END)
+    result_entry.insert(0, result)
+
+
+def button_cos():
+    result = f'cos('
+    result_entry.delete(0, tk.END)
+    result_entry.insert(0, result)
+
+
+def button_tan():
+    result = f'tan('
+    result_entry.delete(0, tk.END)
+    result_entry.insert(0, result)
+
+
+def button_log_ten():
+    result = f'log('
+    result_entry.delete(0, tk.END)
+    result_entry.insert(0, result)
+
+
+def button_ln():
+    result = f'ln('
+    result_entry.delete(0, tk.END)
+    result_entry.insert(0, result)
+
+
+def button_log_two():
+    result = f'log('
+    result_entry.delete(0, tk.END)
+    result_entry.insert(0, result)
+
+
+def button_sqrt():
+    num = result_entry.get()
+    if num == '':
+        result = f'√('
+        result_entry.insert(0, result)
+    else:
+        result = f'{num}x√('
+        result_entry.delete(0, tk.END)
+        result_entry.insert(0, result)
+
+
+def button_abs():
+    result_entry.insert(tk.END, '|')
+
+def button_sinh():
+    result = f'sinh('
+    result_entry.delete(0, tk.END)
+    result_entry.insert(0, result)
+
+
+def button_cosh():
+    result = f'cosh('
+    result_entry.delete(0, tk.END)
+    result_entry.insert(0, result)
+
+
+def button_tanh():
+    result = f'tanh('
+    result_entry.delete(0, tk.END)
+    result_entry.insert(0, result)
+
+
+def button_factorial():
+    result_entry.insert(1, '!')
+
+
+def button_power_two():
+    # float or int
+    num = result_entry.get()
+    print(type(num))
+    result = f'{num}^(2)'
+    result_entry.delete(0, tk.END)
+    result_entry.insert(0, result)
+
+
+def button_power_three():
+    # float or int
+    num = result_entry.get()
+    print(type(num))
+    result = f'{num}^(3)'
+    result_entry.delete(0, tk.END)
+    result_entry.insert(0, result)
+
+def button_pi():
+    num = result_entry.get()
+    if num == '':
+        result_entry.insert(0, '\u03C0')
+    else:
+        result_entry.delete(0, tk.END)
+        result_entry.insert(0, f'2×\u03C0')
+
+
+def button_e():
+    num = result_entry.get()
+    if num == '':
+        result_entry.insert(0, 'e')
+    else:
+        result_entry.delete(0, tk.END)
+        result_entry.insert(0, f'2×e')
+
+
+def button_ac():
+    length = len(result_entry.get())
+    result_entry.delete(length-1)
+
+def button_ce():
+    result_entry.delete(0, tk.END)
+
+
+def button_plus():
+    global operation
+    operation = '+'
+    first_num = result_entry.get()
+    return first_num
+
+
+def button_numbers(num):
+    if operation != '':
+        result_entry.delete(0, tk.END)
+    for i in range(10):
+        if i == num:
+            result_entry.insert('end', num)
+
+
+
+
+
+
+# -----------------------------------------------------------------------------------
+
 
 buttons_features = [
-    {'text': 'sin', 'bg': '#000000', 'command': lambda: button_sqrt()}, 
-    {'text': '99', 'bg': '#000000', 'command': lambda: print('Sin')}, 
-    {'text': '98', 'bg': '#000000', 'command': lambda: print('Sin')}, 
-    {'text': '97', 'bg': '#000000', 'command': lambda: print('Sin')},
-    {'text': '96', 'bg': '#000000', 'command': lambda: print('Sin')}, 
-    {'text': '95', 'bg': '#000000', 'command': lambda: print('Sin')}, 
-    {'text': '94', 'bg': '#000000', 'command': lambda: print('Sin')}, 
-    {'text': '93', 'bg': '#000000', 'command': lambda: print('Sin')},
-    {'text': '92', 'bg': '#000000', 'command': lambda: print('Sin')}, 
-    {'text': '91', 'bg': '#000000', 'command': lambda: print('Sin')}, 
-    {'text': '90', 'bg': '#000000', 'command': lambda: print('Sin')}, 
-    {'text': '89', 'bg': '#000000', 'command': lambda: print('Sin')},
-    {'text': '88', 'bg': '#000000', 'command': lambda: print('Sin')}, 
-    {'text': '87', 'bg': '#000000', 'command': lambda: print('Sin')}, 
-    {'text': '86', 'bg': '#000000', 'command': lambda: print('Sin')}, 
-    {'text': '85', 'bg': '#000000', 'command': lambda: print('Sin')},
-    {'text': '84', 'bg': '#000000', 'command': lambda: print('Sin')}, 
-    {'text': '83', 'bg': '#000000', 'command': lambda: print('Sin')}, 
+    {'text': 'sin', 'bg': '#000000', 'command': lambda: button_sin()}, 
+    {'text': 'cos', 'bg': '#000000', 'command': lambda: button_cos()}, 
+    {'text': 'tan', 'bg': '#000000', 'command': lambda: button_tan()}, 
+    {'text': 'lg10', 'bg': '#000000', 'command': lambda: button_log_ten()},
+    {'text': 'ln', 'bg': '#000000', 'command': lambda: button_ln()}, 
+    {'text': 'lg2', 'bg': '#000000', 'command': lambda: button_log_two()}, 
+    {'text': 'sinh', 'bg': '#000000', 'command': lambda: button_sinh()}, 
+    {'text': 'cosh', 'bg': '#000000', 'command': lambda: button_cosh()},
+    {'text': 'tanh', 'bg': '#000000', 'command': lambda: button_tanh()}, 
+    {'text': 'x!', 'bg': '#000000', 'command': lambda: button_factorial()}, 
+    {'text': '1/x', 'bg': '#000000', 'command': lambda: print('Sin')}, 
+    {'text': '√', 'bg': '#000000', 'command': lambda: button_sqrt()},
+    {'text': 'Exp', 'bg': '#000000', 'command': lambda: print('Sin')}, 
+    {'text': 'Deg', 'bg': '#000000', 'command': lambda: print('Sin')}, 
+    {'text': 'Rad', 'bg': '#000000', 'command': lambda: print('Sin')}, 
+    {'text': '2^', 'bg': '#000000', 'command': lambda: print('Sin')},
+    {'text': '10^', 'bg': '#000000', 'command': lambda: print('Sin')}, 
+    {'text': 'e^', 'bg': '#000000', 'command': lambda: print('Sin')}, 
     {'text': '(', 'bg': '#000000', 'command': lambda: print('Sin')}, 
     {'text': ')', 'bg': '#000000', 'command': lambda: print('Sin')},
-    {'text': '82', 'bg': '#000000', 'command': lambda: print('Sin')}, 
-    {'text': '81', 'bg': '#000000', 'command': lambda: print('Sin')}, 
-    {'text': '80', 'bg': '#000000', 'command': lambda: print('Sin')}, 
-    {'text': '79', 'bg': '#000000', 'command': lambda: print('Sin')},
-    {'text': '\u03C0', 'bg': '#000000', 'command': lambda: print('Sin')}, 
+    {'text': '|x|', 'bg': '#000000', 'command': lambda: button_abs()}, 
+    {'text': 'x²', 'bg': '#000000', 'command': lambda: button_power_two()}, 
+    {'text': 'x³', 'bg': '#000000', 'command': lambda: button_power_three()}, 
+    {'text': 'x^y', 'bg': '#000000', 'command': lambda: print('Sin')},
+    {'text': '\u03C0', 'bg': '#000000', 'command': lambda: button_pi()}, 
     {'text': '7', 'command': lambda: button_numbers(7)}, 
     {'text': '8', 'command': lambda: button_numbers(8)}, 
     {'text': '9', 'command': lambda: button_numbers(9)},
     {'text': '%', 'bg':'#858282', 'command': lambda: print('Sin')}, 
     {'text': '^', 'bg':'#858282', 'command': lambda: print('Sin')},
-    {'text': 'e', 'bg': '#000000', 'command': lambda: print('Sin'), 'command': lambda: print('Sin')}, 
+    {'text': 'e', 'bg': '#000000', 'command': lambda: button_e()}, 
     {'text': '4', 'command': lambda: button_numbers(4)}, 
     {'text': '5', 'command': lambda: button_numbers(5)}, 
     {'text': '6', 'command': lambda: button_numbers(6)}, 
     {'text': '*', 'bg':'#858282', 'command': lambda: print('Sin')}, 
-    {'text': '/', 'bg':'#858282', 'command': lambda: print('Sin')}, 
+    {'text': '÷', 'bg':'#858282', 'command': lambda: print('Sin')}, 
     {'text': 'AC', 'bg': '#DC1212', 'command': lambda: button_ac()}, 
     {'text': '1', 'command': lambda: button_numbers(1)}, 
     {'text': '2', 'command': lambda: button_numbers(2)}, 
@@ -113,7 +214,7 @@ buttons_features = [
     {'text': '+/-', 'command': lambda: print('Sin')}, 
     {'text': '0', 'command': lambda: button_numbers(0)}, 
     {'text': '.', 'command': lambda: print('Sin')}, 
-    {'text': '=', 'bg':'#858282', 'command': lambda: button_equal()},
+    {'text': '=', 'bg':'#858282', 'command': lambda: print('=')},
 ]
 
 
@@ -189,3 +290,4 @@ for row in range(1, rows + 2):
 
 
 window.mainloop()
+
