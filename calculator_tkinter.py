@@ -29,77 +29,100 @@ result_entry.grid(row=0, column=0, columnspan=6, pady=(30, 30),)
 
 operation = ''
 
+def sin_cos_tan_operations(operator):
+
+    calc_result = result_entry.get()
+
+    if calc_result == '' :
+        result = f'{operator}('
+        result_entry.delete(0, tk.END)
+        result_entry.insert(0, result)
+
+    elif calc_result[-1] == '(':
+        calc_result = result_entry.get()
+        result = f'{calc_result}{operator}('
+        result_entry.delete(0, tk.END)
+        result_entry.insert(0, result)
+
+    else:
+        result = f'{calc_result} × {operator}('
+        result_entry.delete(0, tk.END)
+        result_entry.insert(0, result)
+
 
 def button_sin():
-    result = f'sin('
-    result_entry.delete(0, tk.END)
-    result_entry.insert(0, result)
+    sin_cos_tan_operations('sin')
 
 
 def button_cos():
-    result = f'cos('
-    result_entry.delete(0, tk.END)
-    result_entry.insert(0, result)
+    sin_cos_tan_operations('cos')
 
 
 def button_tan():
-    result = f'tan('
-    result_entry.delete(0, tk.END)
-    result_entry.insert(0, result)
+    sin_cos_tan_operations('tan')
 
 
 def button_log_ten():
-    result = f'log('
+    result = 'log('
     result_entry.delete(0, tk.END)
     result_entry.insert(0, result)
 
 
 def button_ln():
-    result = f'ln('
-    result_entry.delete(0, tk.END)
-    result_entry.insert(0, result)
+
+    calc_result = result_entry.get()
+
+    if calc_result == '':
+        result = 'ln('
+        result_entry.insert(0, result)
+
+    elif calc_result[-1] == '(':
+        calc_result = result_entry.get()
+        result = f'{calc_result}ln('
+        result_entry.delete(0, tk.END)
+        result_entry.insert(0, result)
+
+    else:
+        result = f'{calc_result}×ln('
+        result_entry.delete(0, tk.END)
+        result_entry.insert(0, result)
 
 
 def button_log_two():
-    result = f'log('
+    result = 'log('
     result_entry.delete(0, tk.END)
     result_entry.insert(0, result)
+
+
+def button_sinh():
+    sin_cos_tan_operations('sinh')
+
+
+def button_cosh():
+    sin_cos_tan_operations('cosh')
+
+
+def button_tanh():
+    sin_cos_tan_operations('tanh')
+
+
+def button_factorial():
+    result_entry.insert(1, '!')
 
 
 def button_sqrt():
     num = result_entry.get()
     if num == '':
-        result = f'√('
+        result = '√('
         result_entry.insert(0, result)
     else:
-        result = f'{num}x√('
+        result = f'{num}×√('
         result_entry.delete(0, tk.END)
         result_entry.insert(0, result)
 
 
 def button_abs():
     result_entry.insert(tk.END, '|')
-
-def button_sinh():
-    result = f'sinh('
-    result_entry.delete(0, tk.END)
-    result_entry.insert(0, result)
-
-
-def button_cosh():
-    result = f'cosh('
-    result_entry.delete(0, tk.END)
-    result_entry.insert(0, result)
-
-
-def button_tanh():
-    result = f'tanh('
-    result_entry.delete(0, tk.END)
-    result_entry.insert(0, result)
-
-
-def button_factorial():
-    result_entry.insert(1, '!')
 
 
 def button_power_two():
@@ -134,7 +157,7 @@ def button_e():
         result_entry.insert(0, 'e')
     else:
         result_entry.delete(0, tk.END)
-        result_entry.insert(0, f'2×e')
+        result_entry.insert(0, '2×e')
 
 
 def button_ac():
@@ -144,6 +167,26 @@ def button_ac():
 def button_ce():
     result_entry.delete(0, tk.END)
 
+
+def button_negative():
+    calc_state = result_entry.get()
+    if calc_state == '':
+        result = '(-'
+        result_entry.insert(tk.END, result)
+    else:
+        result = f'(-{calc_state}'
+        result_entry.delete(0, tk.END)
+        result_entry.insert(0, result)
+
+
+
+def button_dot():
+    calc_num = result_entry.get()
+    if calc_num == '':
+        result = '0.'
+        result_entry.insert(0, result)
+    else:
+        result_entry.insert(tk.END, '.')
 
 def button_plus():
     global operation
@@ -211,9 +254,9 @@ buttons_features = [
     {'text': '+', 'bg':'#858282', 'command': lambda: button_plus()}, 
     {'text': '-', 'bg':'#858282', 'command': lambda: print('Sin')}, 
     {'text': 'CE', 'bg': '#DC1212', 'command': lambda: button_ce()}, 
-    {'text': '+/-', 'command': lambda: print('Sin')}, 
+    {'text': '+/-', 'command': lambda: button_negative()}, 
     {'text': '0', 'command': lambda: button_numbers(0)}, 
-    {'text': '.', 'command': lambda: print('Sin')}, 
+    {'text': '.', 'command': lambda: button_dot()}, 
     {'text': '=', 'bg':'#858282', 'command': lambda: print('=')},
 ]
 

@@ -9,6 +9,14 @@
 
 ## 📂 Table of contents
 
+- [Installation](#-installation)
+- [Usage](#-usage)
+- [Features](#-features)
+- [Screenshots](#-screenshots)
+- [License](#license)
+- [Demo](#demo)
+
+
 ## 💾 Installation
 
 ## 🚀 Usage
@@ -17,7 +25,7 @@
 
 ## 📸 Screenshots
 
-![]()
+![scientific_calculator](Screenshots/Screenshot%20from%202025-06-21%2009-01-58.png)
 ![]()
 ![]()
 ![]()
