@@ -6,7 +6,7 @@ from main import *
 window = tk.Tk()
 
 window.title('Scientific Calculator')
-window.geometry('500x700')
+window.geometry('500x760')
 window.resizable(width=False, height=False)
 window.configure(background="#B3AEAE")
 
@@ -15,19 +15,27 @@ for col in range(6):
     window.columnconfigure(col, weight=1)
 
 
+result_label = tk.Label(
+    master=window,
+    font=('sans-serif', 20, 'bold'),
+    width=20,
+    height=2,
+    background="#B3AEAE"
+)
+result_label.grid(row=0, column=0, columnspan=6, pady=(5,5))
+
+
 result_entry = tk.Entry(
     master=window,
     font=('sans-serif', 20, 'bold'),
     border=5,
     justify='right',
 )
-result_entry.grid(row=0, column=0, columnspan=6, pady=(30, 30),)
+result_entry.grid(row=1, column=0, columnspan=6, pady=(5, 10),)
 
 # -----------------------------------------------------------------------------------
 
 
-
-operation = ''
 
 def sin_cos_tan_operations(operator):
 
@@ -107,11 +115,17 @@ def button_tanh():
 
 
 def button_factorial():
-    result_entry.insert(1, '!')
+    num = int(result_entry.get())
+    result = math.factorial(num)
+    result_entry.delete(0, tk.END)
+    result_entry.insert(0, result)
+    result_label['text'] = f'{num}! = {result}'
 
 
 def button_sqrt():
-    num = result_entry.get()
+    num = int(result_entry.get())
+    calc_result = math.sqrt(num)
+
     if num == '':
         result = '√('
         result_entry.insert(0, result)
@@ -119,6 +133,16 @@ def button_sqrt():
         result = f'{num}×√('
         result_entry.delete(0, tk.END)
         result_entry.insert(0, result)
+    
+    return calc_result
+
+
+def button_parenthes_start():
+    result_entry.insert(tk.END, '(')
+
+
+def button_parenthes_end():
+    result_entry.insert(tk.END, ')')
 
 
 def button_abs():
@@ -166,6 +190,7 @@ def button_ac():
 
 def button_ce():
     result_entry.delete(0, tk.END)
+    result_label['text'] = ''
 
 
 def button_negative():
@@ -179,7 +204,6 @@ def button_negative():
         result_entry.insert(0, result)
 
 
-
 def button_dot():
     calc_num = result_entry.get()
     if calc_num == '':
@@ -188,23 +212,23 @@ def button_dot():
     else:
         result_entry.insert(tk.END, '.')
 
-def button_plus():
-    global operation
-    operation = '+'
-    first_num = result_entry.get()
-    return first_num
-
 
 def button_numbers(num):
-    if operation != '':
-        result_entry.delete(0, tk.END)
     for i in range(10):
         if i == num:
             result_entry.insert('end', num)
 
 
+def button_main_operations(operator):
+    result_entry.insert(tk.END, operator)
 
 
+def button_equal():
+    operation = result_entry.get()
+    result = str(eval(operation))
+    result_label['text'] = f'{operation} = {result}'
+    result_entry.delete(0, tk.END)
+    result_entry.insert(0, result)
 
 
 # -----------------------------------------------------------------------------------
@@ -229,8 +253,8 @@ buttons_features = [
     {'text': '2^', 'bg': '#000000', 'command': lambda: print('Sin')},
     {'text': '10^', 'bg': '#000000', 'command': lambda: print('Sin')}, 
     {'text': 'e^', 'bg': '#000000', 'command': lambda: print('Sin')}, 
-    {'text': '(', 'bg': '#000000', 'command': lambda: print('Sin')}, 
-    {'text': ')', 'bg': '#000000', 'command': lambda: print('Sin')},
+    {'text': '(', 'bg': '#000000', 'command': lambda: button_parenthes_start()}, 
+    {'text': ')', 'bg': '#000000', 'command': lambda: button_parenthes_end()},
     {'text': '|x|', 'bg': '#000000', 'command': lambda: button_abs()}, 
     {'text': 'x²', 'bg': '#000000', 'command': lambda: button_power_two()}, 
     {'text': 'x³', 'bg': '#000000', 'command': lambda: button_power_three()}, 
@@ -239,25 +263,25 @@ buttons_features = [
     {'text': '7', 'command': lambda: button_numbers(7)}, 
     {'text': '8', 'command': lambda: button_numbers(8)}, 
     {'text': '9', 'command': lambda: button_numbers(9)},
-    {'text': '%', 'bg':'#858282', 'command': lambda: print('Sin')}, 
-    {'text': '^', 'bg':'#858282', 'command': lambda: print('Sin')},
+    {'text': '%', 'bg':'#858282', 'command': lambda: button_main_operations('%')}, 
+    {'text': '^', 'bg':'#858282', 'command': lambda: button_main_operations('^')},
     {'text': 'e', 'bg': '#000000', 'command': lambda: button_e()}, 
     {'text': '4', 'command': lambda: button_numbers(4)}, 
     {'text': '5', 'command': lambda: button_numbers(5)}, 
     {'text': '6', 'command': lambda: button_numbers(6)}, 
-    {'text': '*', 'bg':'#858282', 'command': lambda: print('Sin')}, 
-    {'text': '÷', 'bg':'#858282', 'command': lambda: print('Sin')}, 
+    {'text': '*', 'bg':'#858282', 'command': lambda: button_main_operations('*')}, 
+    {'text': '÷', 'bg':'#858282', 'command': lambda: button_main_operations('/')}, 
     {'text': 'AC', 'bg': '#DC1212', 'command': lambda: button_ac()}, 
     {'text': '1', 'command': lambda: button_numbers(1)}, 
     {'text': '2', 'command': lambda: button_numbers(2)}, 
     {'text': '3', 'command': lambda: button_numbers(3)}, 
-    {'text': '+', 'bg':'#858282', 'command': lambda: button_plus()}, 
-    {'text': '-', 'bg':'#858282', 'command': lambda: print('Sin')}, 
+    {'text': '+', 'bg':'#858282', 'command': lambda: button_main_operations('+')}, 
+    {'text': '-', 'bg':'#858282', 'command': lambda: button_main_operations('-')}, 
     {'text': 'CE', 'bg': '#DC1212', 'command': lambda: button_ce()}, 
     {'text': '+/-', 'command': lambda: button_negative()}, 
     {'text': '0', 'command': lambda: button_numbers(0)}, 
     {'text': '.', 'command': lambda: button_dot()}, 
-    {'text': '=', 'bg':'#858282', 'command': lambda: print('=')},
+    {'text': '=', 'bg':'#858282', 'command': lambda: button_equal()},
 ]
 
 
@@ -318,17 +342,17 @@ cols = 6
 for index, button in enumerate(calc_buttons):
     if index in skip_indexes:
         continue
-    row = index // cols + 1
+    row = index // cols + 2
     col = index % cols
     button.grid(row=row, column=col, sticky='nsew', padx=5, pady=5)
 
 
-plus_button.grid(row=7, column=4, rowspan=2, sticky='nsew', padx=5, pady=5)
+plus_button.grid(row=8, column=4, rowspan=2, sticky='nsew', padx=5, pady=5)
 
-equal_button.grid(row=8, column=5, sticky='nsew', padx=5, pady=5)
+equal_button.grid(row=9, column=5, sticky='nsew', padx=5, pady=5)
 
 
-for row in range(1, rows + 2):
+for row in range(1, rows + 3):
     window.rowconfigure(row, weight=1)
 
 
